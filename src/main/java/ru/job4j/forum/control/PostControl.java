@@ -40,4 +40,17 @@ public class PostControl {
         postService.addMessage(id, message.getText());
         return String.format("redirect:/description/%d", id);
     }
+
+    @GetMapping("/edit/{pId}")
+    public String editFrom(@PathVariable("pId") int id, Model model) {
+        model.addAttribute("id", id);
+        return "post/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam("id") int id, @ModelAttribute Post post) {
+        post.setCreated(Calendar.getInstance().getTime());
+        postService.update(id, post);
+        return String.format("redirect:/description/%d", id);
+    }
 }

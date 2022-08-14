@@ -1,7 +1,13 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: KuzAS
+  Date: 12.08.2022
+  Time: 10:14
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,13 +22,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <style>
+        div.container-xl {
+            margin-top: 15px;
+        }
+    </style>
+
     <title>Форум</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="<c:url value='/index'/>">
-        <img src="${pageContext.request.contextPath}/resources/img/bubble_logo.png"
-             alt="Форум" width="32" height="32" class="d-inline-block align-text-top"/>
+        <img src="${pageContext.request.contextPath}/resources/img/bubble_logo.png" alt="" width="32" height="32" class="d-inline-block align-text-top"/>
         Форум
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -47,35 +58,26 @@
     </div>
 </nav>
 <div class="container-xl">
-    <div class="row pt-3">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Тема</th>
-                <th scope="col">Дата публикации</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="post" items="${posts}">
-                <tr>
-                    <td>
-                        <img src="${pageContext.request.contextPath}/resources/img/topic_bubble.png"
-                             alt="" width="32" height="32" class="d-inline-block align-text-top"/>
-                        <a href="<c:url value='/description/${post.id}'/>" style="color: black" ><c:out value="${post.name}"/></a>
-                    </td>
-                    <td>
-                        <c:out value="${post.created.toGMTString()}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+    <div class="card" style="width: 100%">
+        <div class="card-body">
+            <form  action="<c:url value='/edit?id=${id}'/>" method='POST'>
+                <div class="form-group">
+                    <label for="name">Название темы:</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Сообщение:</label>
+                    <textarea class="form-control" name="description" id="description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-dark"> Редактировать </button>
+            </form>
+        </div>
     </div>
 </div>
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
         <div class="col-md-4 d-flex align-items-center">
-            <a href="" class="mb-3 me-5 mb-md-0 text-muted text-decoration-none lh-1">
+            <a href="<c:url value='/index'/>" class="mb-3 me-5 mb-md-0 text-muted text-decoration-none lh-1">
                 <img src="${pageContext.request.contextPath}/resources/img/bubble_logo_black.png" alt="" width="24" height="24" class="d-inline-block align-text-top"/>
             </a>
         </div>

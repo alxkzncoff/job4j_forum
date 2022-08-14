@@ -22,6 +22,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <style>
+        div.container-xl {
+            margin-top: 15px;
+        }
+    </style>
+
     <title>Форум</title>
 </head>
 <body>
@@ -34,8 +40,23 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link">
+                <span>
+                    <a href="<c:url value='/add'/>" style="color: white; font-size: 20px" > Новая тема </a>
+                </span>
+            </a>
+        </div>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link">
+                <span>
+                    <a href="<c:url value='/login'/>" style="color: white; font-size: 20px" > Выйти </a>
+                </span>
+            </a>
+        </div>
+    </div>
 </nav>
-</body>
 <div class="container-xl">
     <div class="card" style="width: 100%">
         <div class="card-body">
@@ -70,4 +91,5 @@
         </ul>
     </footer>
 </div>
+</body>
 </html>

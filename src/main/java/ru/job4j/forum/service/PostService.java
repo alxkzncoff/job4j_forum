@@ -25,6 +25,10 @@ public class PostService {
         posts.put(post.getId(), post);
     }
 
+    public void update(int id, Post post) {
+        posts.replace(id, post);
+    }
+
     public Optional<Post> findById(int id) {
         return Optional.of(posts.get(id));
     }

@@ -36,11 +36,20 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <a class="nav-item nav-link">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link">
                 <span>
                     <a href="<c:url value='/add'/>" style="color: white; font-size: 20px" > Новая тема </a>
                 </span>
-        </a>
+            </a>
+        </div>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link">
+                <span>
+                    <a href="<c:url value='/login'/>" style="color: white; font-size: 20px" > Выйти </a>
+                </span>
+            </a>
+        </div>
     </div>
 </nav>
 <div class="container-xl">
@@ -76,6 +85,7 @@
                         <textarea class="form-control" name="text" id="text"></textarea>
                     </div>
                     <button type="submit" class="btn btn-dark"> Отправить </button>
+                    <a class="btn btn-primary" href="<c:url value='/edit/${post.id}'/>" role="button"> Редактировать </a>
                 </form>
             </div>
         </div>
