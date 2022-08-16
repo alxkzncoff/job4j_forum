@@ -12,7 +12,4 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
 
     @Query("SELECT DISTINCT p FROM Post p JOIN FETCH p.messages WHERE p.id = ?1")
     Optional<Post> findById();
-
-//    @Query("SELECT DISTINCT p FROM Post p JOIN FETCH p.messages")
-//    Iterable<Post> findAll();
 }
