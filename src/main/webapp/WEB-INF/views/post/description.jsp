@@ -69,7 +69,7 @@
             <c:forEach var="message" items="${post.messages}">
                 <tr>
                     <td>
-                        <c:out value="${message}"/>
+                        <c:out value="${message.msg}"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -81,8 +81,8 @@
             <div class="card-body">
                 <form  action="<c:url value='/addMessage?id=${post.id}'/>" method='POST'>
                     <div class="form-group">
-                        <label for="text">Сообщение:</label>
-                        <textarea class="form-control" name="text" id="text"></textarea>
+                        <label for="msg">Сообщение:</label>
+                        <textarea class="form-control" name="msg" id="msg"></textarea>
                     </div>
                     <button type="submit" class="btn btn-dark"> Отправить </button>
                     <a class="btn btn-primary" href="<c:url value='/edit/${post.id}'/>" role="button"> Редактировать </a>

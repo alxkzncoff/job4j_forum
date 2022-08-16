@@ -8,6 +8,7 @@ import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
 import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class PostControl {
@@ -25,7 +26,7 @@ public class PostControl {
     @PostMapping("/add")
     public String add(@ModelAttribute Post post) {
         post.setCreated(Calendar.getInstance().getTime());
-        postService.add(post);
+        postService.save(post);
         return "redirect:/";
     }
 
@@ -37,7 +38,9 @@ public class PostControl {
 
     @PostMapping("/addMessage")
     public String addMessage(@RequestParam("id") int id, @ModelAttribute Message message) {
-        postService.addMessage(id, message.getText());
+        Post post = postService.findById(id).get();
+        post.addMessage(Message.of(message.getMsg()));
+        postService.save(post);
         return String.format("redirect:/description/%d", id);
     }
 
@@ -49,8 +52,9 @@ public class PostControl {
 
     @PostMapping("/edit")
     public String edit(@RequestParam("id") int id, @ModelAttribute Post post) {
-        post.setCreated(Calendar.getInstance().getTime());
-        postService.update(id, post);
+        post.setCreated(new Date(System.currentTimeMillis()));
+        post.setId(id);
+        postService.save(post);
         return String.format("redirect:/description/%d", id);
     }
 }

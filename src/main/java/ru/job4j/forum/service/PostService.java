@@ -1,43 +1,53 @@
 package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.forum.model.Post;
+import ru.job4j.forum.persistence.PostRepository;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class PostService {
-    private final AtomicInteger id = new AtomicInteger(3);
-    private final HashMap<Integer, Post> posts = new HashMap<>();
+    private final PostRepository store;
 
-    public PostService() {
-        posts.put(1, Post.of(1, "О чем форум.", "Описание форума.",
-                Calendar.getInstance().getTime()));
-        posts.put(2, Post.of(2, "Правила форума.", "Свод правил.",
-                Calendar.getInstance().getTime()));
-        posts.put(3, Post.of(3, "Беседка.", "Свободное общение.",
-                Calendar.getInstance().getTime()));
+    public PostService(PostRepository store) {
+        this.store = store;
     }
 
-    public void add(Post post) {
-        post.setId(id.incrementAndGet());
-        posts.put(post.getId(), post);
+    /**
+     * Метод добавляет пост на форум.
+     * @param post Новый пост.
+     * @return Добавленный пост.
+     *
+     *  Метод save реализован так, что при его вызове SD проверяет, есть ли у переданного объекта идентификатор.
+     *  Если его нет, то SD понимает, что это новый объект и сохраняет его в базу данных.
+     *  Объект, соответственно получает ID. Если же ID есть, то SD обновляет его.
+     *  Поэтому на два действия у нас один метод.
+     */
+    @Transactional
+    public Post save(Post post) {
+        return store.save(post);
     }
 
-    public void update(int id, Post post) {
-        posts.replace(id, post);
-    }
-
+    /**
+     * Метод возвращает пост по id.
+     * @param id Идентификационный номер поста.
+     * @return Найденный пост.
+     */
+    @Transactional
     public Optional<Post> findById(int id) {
-        return Optional.of(posts.get(id));
+        return store.findById(id);
     }
 
+    /**
+     * Метод возвращает список всех постов на форуме.
+     * @return Список постов.
+     */
+    @Transactional
     public List<Post> findAll() {
-        return posts.values().stream().toList();
-    }
-
-    public void addMessage(int id, String message) {
-        posts.get(id).getMessages().add(message);
+        List<Post> posts = new ArrayList<>();
+        store.findAll().forEach(posts::add);
+        return posts;
     }
 }

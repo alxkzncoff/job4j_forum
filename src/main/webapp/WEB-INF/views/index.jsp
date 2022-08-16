@@ -64,7 +64,7 @@
                         <a href="<c:url value='/description/${post.id}'/>" style="color: black" ><c:out value="${post.name}"/></a>
                     </td>
                     <td>
-                        <c:out value="${post.created.toGMTString()}"/>
+                        <c:out value="${post.created}"/>
                     </td>
                 </tr>
             </c:forEach>
