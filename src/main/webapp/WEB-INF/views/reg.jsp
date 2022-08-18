@@ -36,7 +36,7 @@
     <div class="col-sm">
         <div class="card" style="width: 100%">
             <div class="card-body">
-                <form>
+                <form name='login' action="<c:url value='/reg'/>" method='POST'>
                     <img class="mb-4" src="${pageContext.request.contextPath}/resources/img/signin_logo.png">
                     <h1>Регистрация</h1>
                     <div class="form-group">
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <a class="btn btn-success" href="<c:url value='/login'/>" role="button"> Зарегистрироваться </a>
+                    <button type="submit" class="btn btn-success"> Зарегистрировать </button>
                     <p class="mt-5 mb-3 text-muted"> © alxkzncoff 2022 </p>
                 </form>
             </div>

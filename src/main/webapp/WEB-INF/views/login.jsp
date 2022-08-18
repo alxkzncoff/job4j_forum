@@ -36,7 +36,17 @@
   <div class="col-sm">
     <div class="card" style="width: 100%">
       <div class="card-body">
-        <form>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                    ${errorMessage}
+            </div>
+        </c:if>
+        <c:if test="${not empty successReg}">
+            <div class="alert alert-success" role="alert">
+                    ${successReg}
+            </div>
+        </c:if>
+        <form form name='login' action="<c:url value='/login'/>" method='POST'>
           <img class="mb-4" src="${pageContext.request.contextPath}/resources/img/signin_logo.png">
           <h1>Добро пожаловать на форум!</h1>
           <div class="form-group">
@@ -45,10 +55,11 @@
           <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password">
           </div>
-          <a class="btn btn-success" href="<c:url value='/index'/>" role="button"> Авторизоваться </a>
+          <button type="submit" class="btn btn-success"> Авторизация </button>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <a class="btn btn-primary" href="<c:url value='/reg'/>" role="button"> Регистрация </a>
-          <p class="mt-5 mb-3 text-muted"> © alxkzncoff 2022 </p>
         </form>
+        <p class="mt-5 mb-3 text-muted"> © alxkzncoff 2022 </p>
       </div>
     </div>
   </div>

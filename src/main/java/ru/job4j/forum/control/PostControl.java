@@ -1,5 +1,6 @@
 package ru.job4j.forum.control;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,8 @@ public class PostControl {
     }
 
     @GetMapping("/add")
-    public String addForm() {
+    public String addForm(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "post/add";
     }
 
@@ -32,6 +34,7 @@ public class PostControl {
 
     @GetMapping("/description/{pId}")
     public String post(@PathVariable("pId") int id, Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("post", postService.findById(id).get());
         return "post/description";
     }
@@ -46,6 +49,7 @@ public class PostControl {
 
     @GetMapping("/edit/{pId}")
     public String editFrom(@PathVariable("pId") int id, Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("id", id);
         return "post/edit";
     }

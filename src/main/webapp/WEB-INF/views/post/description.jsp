@@ -46,7 +46,7 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link">
                 <span>
-                    <a href="<c:url value='/login'/>" style="color: white; font-size: 20px" > Выйти </a>
+                    <a href="<c:url value='/logout'/>" style="color: white; font-size: 20px" > <c:out value="${user.username}"/> | Выйти </a>
                 </span>
             </a>
         </div>
