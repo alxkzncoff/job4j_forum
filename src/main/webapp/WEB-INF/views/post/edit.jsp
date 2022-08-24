@@ -25,14 +25,15 @@
     <style>
         div.container-xl {
             margin-top: 15px;
+            min-height: 80%;
         }
 
         footer {
-            clear: both;
-            position: relative;
-            height: 80px;
-            width: 100%;
-            margin-top: -200px;
+            position:relative;
+            left:0px;
+            bottom:0px;
+            height:30px;
+            width:100%;
         }
     </style>
 
