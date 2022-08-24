@@ -42,7 +42,7 @@ public class PostControl {
     @GetMapping("/description/{pId}")
     public String post(@PathVariable("pId") int id, Model model) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        model.addAttribute("post", postService.findById(id).get());
+        model.addAttribute("post", postService.findById(id).orElse(null));
         return "post/description";
     }
 

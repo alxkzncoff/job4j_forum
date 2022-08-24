@@ -1,13 +1,16 @@
 CREATE TABLE IF NOT EXISTS messages(
     id SERIAL PRIMARY KEY,
-    msg TEXT
+    msg TEXT,
+    user_id INT REFERENCES users(id),
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );
 
 CREATE TABLE IF NOT EXISTS posts(
     id SERIAL PRIMARY KEY,
     name VARCHAR(1000),
     description TEXT,
-    created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
+    created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+    user_id INT REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS authorities(
@@ -23,8 +26,4 @@ CREATE TABLE IF NOT EXISTS users(
     authority_id INT NOT NULL REFERENCES authorities(id)
 );
 
-ALTER TABLE messages ADD user_id INT REFERENCES users(id);
-ALTER TABLE messages ADD created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now();
-
-ALTER TABLE posts ADD user_id INT REFERENCES users(id);
 
