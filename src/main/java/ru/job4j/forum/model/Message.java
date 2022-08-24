@@ -1,6 +1,7 @@
 package ru.job4j.forum.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,9 +13,17 @@ public class Message {
     private int id;
     private String msg;
 
-    public static Message of(String text) {
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created = new Date(System.currentTimeMillis());
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
+    private User user;
+
+    public static Message of(String text, User user) {
         Message message = new Message();
         message.msg = text;
+        message.user = user;
         return message;
     }
 
@@ -34,12 +43,30 @@ public class Message {
         this.msg = msg;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     @Override
     public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", msg='" + msg + '\'' +
-                '}';
+        return "Message{"
+                + "id=" + id
+                + ", msg='" + msg + '\''
+                + ", created=" + created
+                + ", user=" + user
+                + '}';
     }
 
     @Override

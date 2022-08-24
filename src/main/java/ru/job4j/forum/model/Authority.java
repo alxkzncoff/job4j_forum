@@ -36,10 +36,10 @@ public class Authority {
 
     @Override
     public String toString() {
-        return "Authority{" +
-                "id=" + id +
-                ", authority='" + authority + '\'' +
-                '}';
+        return "Authority{"
+                + "id=" + id
+                + ", authority='" + authority + '\''
+                + '}';
     }
 
     @Override

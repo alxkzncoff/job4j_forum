@@ -10,11 +10,6 @@ CREATE TABLE IF NOT EXISTS posts(
     created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS posts_messages(
-    post_id INT REFERENCES posts(id),
-    message_id INT REFERENCES messages(id)
-);
-
 CREATE TABLE IF NOT EXISTS authorities(
     id SERIAL PRIMARY KEY,
     authority VARCHAR(50) NOT NULL UNIQUE
@@ -27,3 +22,9 @@ CREATE TABLE IF NOT EXISTS users(
     enabled BOOLEAN DEFAULT TRUE,
     authority_id INT NOT NULL REFERENCES authorities(id)
 );
+
+ALTER TABLE messages ADD user_id INT REFERENCES users(id);
+ALTER TABLE messages ADD created TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now();
+
+ALTER TABLE posts ADD user_id INT REFERENCES users(id);
+

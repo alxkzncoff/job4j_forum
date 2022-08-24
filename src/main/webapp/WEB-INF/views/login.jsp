@@ -36,19 +36,19 @@
   <div class="col-sm">
     <div class="card" style="width: 100%">
       <div class="card-body">
-        <c:if test="${not empty errorMessage}">
-            <div class="alert alert-danger" role="alert">
-                    ${errorMessage}
-            </div>
-        </c:if>
-        <c:if test="${not empty successReg}">
-            <div class="alert alert-success" role="alert">
-                    ${successReg}
-            </div>
-        </c:if>
         <form form name='login' action="<c:url value='/login'/>" method='POST'>
           <img class="mb-4" src="${pageContext.request.contextPath}/resources/img/signin_logo.png">
           <h1>Добро пожаловать на форум!</h1>
+          <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                ${errorMessage}
+            </div>
+          </c:if>
+          <c:if test="${not empty successReg}">
+            <div class="alert alert-success" role="alert">
+                ${successReg}
+            </div>
+          </c:if>
           <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username">
           </div>

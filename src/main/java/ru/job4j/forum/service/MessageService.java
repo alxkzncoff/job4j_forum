@@ -48,4 +48,13 @@ public class MessageService {
         store.findAll().forEach(messages::add);
         return messages;
     }
+
+    /**
+     * Метод удаляет сообщение по id.
+     * @param id Идентификационный номер сообщения.
+     */
+    @Transactional
+    public void deleteById(int id) {
+        store.deleteById(id);
+    }
 }

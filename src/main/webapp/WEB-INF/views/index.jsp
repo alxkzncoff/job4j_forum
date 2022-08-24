@@ -16,6 +16,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <style>
+        footer {
+            clear: both;
+            position: relative;
+            height: 80px;
+            width: 100%;
+            margin-top: -200px;
+        }
+    </style>
+
     <title>Форум</title>
 </head>
 <body>
@@ -52,19 +62,26 @@
             <thead>
             <tr>
                 <th scope="col">Тема</th>
+                <th scope="col">Автор</th>
                 <th scope="col">Дата публикации</th>
             </tr>
             </thead>
             <tbody>
+            <c:set var="index" value="${1}"/>
             <c:forEach var="post" items="${posts}">
                 <tr>
                     <td>
                         <img src="${pageContext.request.contextPath}/resources/img/topic_bubble.png"
                              alt="" width="32" height="32" class="d-inline-block align-text-top"/>
+                        #${index}
                         <a href="<c:url value='/description/${post.id}'/>" style="color: black" ><c:out value="${post.name}"/></a>
+                        <c:set var="index" value="${index + 1}"/>
                     </td>
                     <td>
-                        <c:out value="${post.created}"/>
+                        <c:out value="${post.user.username}"/>
+                    </td>
+                    <td>
+                        <c:out value="${post.created.toLocaleString()}"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -72,22 +89,20 @@
         </table>
     </div>
 </div>
-<div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="" class="mb-3 me-5 mb-md-0 text-muted text-decoration-none lh-1">
-                <img src="${pageContext.request.contextPath}/resources/img/bubble_logo_black.png" alt="" width="24" height="24" class="d-inline-block align-text-top"/>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <a href="<c:url value='/index'/>" class="mb-3 me-5 mb-md-0 text-muted text-decoration-none lh-1">
+            <img src="${pageContext.request.contextPath}/resources/img/bubble_logo_black.png" alt="" width="24" height="24" class="d-inline-block align-text-top"/>
+        </a>
+    </div>
+    <span class="mb-3 mb-md-0 text-muted">alxkzncoff 2022</span>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3">
+            <a class="text-muted" href="https://github.com/alxkzncoff">
+                <img src="${pageContext.request.contextPath}/resources/img/github_logo.png" alt="alxkzncoff" width="24" height="24"/>
             </a>
-        </div>
-        <span class="mb-3 mb-md-0 text-muted">alxkzncoff 2022</span>
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3">
-                <a class="text-muted" href="https://github.com/alxkzncoff">
-                    <img src="${pageContext.request.contextPath}/resources/img/github_logo.png" alt="alxkzncoff" width="24" height="24"/>
-                </a>
-            </li>
-        </ul>
-    </footer>
-</div>
+        </li>
+    </ul>
+</footer>
 </body>
 </html>

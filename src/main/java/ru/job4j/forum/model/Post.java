@@ -1,7 +1,11 @@
 package ru.job4j.forum.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 @Table(name = "posts")
@@ -16,7 +20,13 @@ public class Post {
     private Date created = new Date(System.currentTimeMillis());
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Message> messages = new ArrayList<>();
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
+    private User user;
 
 
     public static Post of(int id, String name, String description, Date created) {
@@ -71,13 +81,28 @@ public class Post {
         this.messages.add(message);
     }
 
+    public void deleteMessage(Message message) {
+        this.messages.remove(message);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created + '}';
+        return "Post{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + ", created=" + created
+                + ", messages=" + messages
+                + ", user=" + user
+                + '}';
     }
 
     @Override
