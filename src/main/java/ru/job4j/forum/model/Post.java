@@ -100,7 +100,6 @@ public class Post {
                 + ", name='" + name + '\''
                 + ", description='" + description + '\''
                 + ", created=" + created
-                + ", messages=" + messages
                 + ", user=" + user
                 + '}';
     }
