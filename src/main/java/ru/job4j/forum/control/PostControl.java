@@ -33,7 +33,7 @@ public class PostControl {
     public String add(@ModelAttribute Post post) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = userService.findByName(username);
-        post.setUser(user.get());
+        post.setUser(user.orElse(null));
         post.setCreated(Calendar.getInstance().getTime());
         postService.save(post);
         return "redirect:/";

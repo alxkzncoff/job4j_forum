@@ -14,17 +14,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
-class IndexControlTest {
+class LoginControlTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     @WithMockUser
-    public void indexShouldReturnDefaultMessage() throws Exception {
-        this.mockMvc.perform(get("/index"))
+    public void loginShouldReturnDefaultMessage() throws Exception {
+        this.mockMvc.perform(get("/login"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
+                .andExpect(view().name("login"));
     }
+
+    @Test
+    @WithMockUser
+    public void logoutShouldReturnDefaultMessage() throws Exception {
+        this.mockMvc.perform(get("/logout"))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/login?logout=true"));
+    }
+
 }
