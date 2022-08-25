@@ -20,6 +20,7 @@
         div.container-xl {
             margin-top: 15px;
             min-height: 80%;
+            margin-bottom: 570px;
         }
 
         footer {
