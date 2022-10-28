@@ -1,20 +1,46 @@
-# Проект "Форум"
+# Проект - "Форум"
 
 ## Общая информация.
 
-Проект разработан с целью улучшения навыков работы с различными стеками технологий.
+Проект разработан с целью улучшения навыков работы с различными стеками технологий 
+и представляет собой классический форум.
 При необходимости функционал проекта можно расширить.
 
-Проект представляет собой классический форум.
+## Запуск проекта
 
-## Пример функционирования.
+Для корректной работы приложения необходимо установить следующие программы:
 
-В процессе..
+- Java 16 или выше;
+- PostgreSQL 14 или выше;
+- Apache Maven 3.8.3 или выше.
 
-[![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
-[![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![PostgresSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)](https://hibernate.org/)
+1. Настройка postgreSQL. В терминале набрать следующие команды:
+
+- Ввести логин. Вместо username указать свой;
+```bash
+  psql --username <username>
+```
+- Ввести пароль;
+- Создать базу данных.
+```bash
+  create database forum;
+```
+
+2. Запуск при помощи maven. В терминале набрать следующие команды:
+```
+  mvn spring-boot:run
+```
+
+При необходимости запустить liquibase для создания таблиц в БД.
+```
+  mvn liquibase:update
+```
+
+## Технологии
+
+[![java](https://img.shields.io/badge/java-16-red)](https://www.java.com/)
+[![maven](https://img.shields.io/badge/apache--maven-3.8.3-blue)](https://maven.apache.org/)
+[![Spring Boot](https://img.shields.io/badge/spring%20boot-2.7.3-brightgreen)](https://spring.io/projects/spring-boot)
+[![PostgresSQL](https://img.shields.io/badge/postgreSQL-14-blue)](https://www.postgresql.org/)
 
 [![Actions Status](https://github.com/alxkzncoff/job4j_forum/workflows/java-ci/badge.svg)](https://github.com/alxkzncoff/job4j_forum/actions)
