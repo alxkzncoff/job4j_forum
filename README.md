@@ -12,6 +12,8 @@
 
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker-compose](https://docs.docker.com/compose/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [minikube](https://minikube.sigs.k8s.io/docs/start/)
 
 1. Запуск проекта с помощью Docker:
 
@@ -30,6 +32,31 @@ cd <path>/job4j_forum
 Собрать контейнер и запустить:
 ```
 docker-compose up --build
+```
+
+2. Развертывание и запуск кластера Kubernetes:
+
+Перейти в папку с конфигурациоными файлами:
+
+```
+cd <path>/job4j_forum/k8s
+```
+
+где ```path``` путь до проекта.
+
+Развертывание:
+
+```
+kubectl apply -f postgresdb-secret.yml
+kubectl apply -f postgresdb-configmap.yml
+kubectl apply -f postgresdb-deployment.yml
+kubectl apply -f spring-deployment.yml
+```
+
+Запуск:
+
+```
+minikube service spring-boot-service
 ```
 
 ## Технологии
